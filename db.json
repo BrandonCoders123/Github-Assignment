@@ -21,5 +21,28 @@
         "fav_place": "M",
         "fav_song": "EFN",
         "submitted_at": "2026-01-20 20:07:30"
+    },
+    {
+        "last_name": "Weaver",
+        "first_name": "Jack",
+        "date_of_birth": "2010-05-24",
+        "hobbies": "Gaming, running, DnD",
+        "dislikes": "having to work with lobotomites ",
+        "likes": "Pet dogs, human sacrifices",
+        "gender": "Male",
+        "pronouns": "He\/Him\/His",
+        "job": "Unemployed",
+        "college": "UC Berkeley ",
+        "gpa": "4.00",
+        "bff": "Luke Rodgers",
+        "zodiac": "Gemini",
+        "sports": "Cross country, Track and Field",
+        "fav_food": "Sushi",
+        "least_fav_food": "Butternut Squash",
+        "height": "about 5'9",
+        "fav_pet": "Dogs",
+        "fav_place": "My grandma's house",
+        "fav_song": "Alters of Apostasy ",
+        "submitted_at": "2026-01-20 20:11:09"
     }
 ]
