@@ -1,6 +1,6 @@
 <?php
 $theme = [
-    'site_title' => 'Xbox Gaming Hub',
+    'site_title' => 'Student Portal',
     'primary_color' => '#107c10',
     'primary_hover' => '#0e6e0e',
     'background_color' => '#0e0e0e',
