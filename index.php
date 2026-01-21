@@ -1,10 +1,10 @@
 <?php
-// File where data will be stored
+require_once 'theme.php';
+
 $dbFile = "db.json";
+$successMessage = "";
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
     $entry = [
         "last_name" => $_POST["last_name"] ?? "",
         "first_name" => $_POST["first_name"] ?? "",
@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         "submitted_at" => date("Y-m-d H:i:s")
     ];
 
-    // Load existing data
     if (file_exists($dbFile)) {
         $data = json_decode(file_get_contents($dbFile), true);
         if (!is_array($data)) {
@@ -39,49 +38,100 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $data = [];
     }
 
-    // Add new entry
     $data[] = $entry;
-
-    // Save back to JSON file
     file_put_contents($dbFile, json_encode($data, JSON_PRETTY_PRINT));
-
-    echo "<p><strong>Form submitted successfully!</strong></p>";
+    $successMessage = "Form submitted successfully!";
 }
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>20 Question Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $theme['site_title']; ?> - 20 Questions</title>
+    <style>
+        <?php echo getThemeStyles($theme); ?>
+    </style>
 </head>
 <body>
 
-<h2>20 Question Form</h2>
+<nav class="icon-bar">
+    <a href="index.php" class="icon"><span>📝</span>Form</a>
+    <a href="jack.php" class="icon"><span>🎮</span>Home</a>
+    <a href="function.php" class="icon"><span>📊</span>Submissions</a>
+</nav>
 
-<form method="post">
-    Last Name: <input type="text" name="last_name"><br><br>
-    First Name: <input type="text" name="first_name"><br><br>
-    Date of Birth: <input type="date" name="dob"><br><br>
-    Hobbies: <input type="text" name="hobbies"><br><br>
-    Dislikes: <input type="text" name="dislikes"><br><br>
-    Likes: <input type="text" name="likes"><br><br>
-    Gender: <input type="text" name="gender"><br><br>
-    Pronouns: <input type="text" name="pronouns"><br><br>
-    Job (Work): <input type="text" name="job"><br><br>
-    College You Want to Go To: <input type="text" name="college"><br><br>
-    GPA: <input type="text" name="gpa"><br><br>
-    BFF: <input type="text" name="bff"><br><br>
-    Zodiac Sign: <input type="text" name="zodiac"><br><br>
-    Sports: <input type="text" name="sports"><br><br>
-    Favorite Food: <input type="text" name="fav_food"><br><br>
-    Least Favorite Food: <input type="text" name="least_fav_food"><br><br>
-    Height: <input type="text" name="height"><br><br>
-    Favorite Pet: <input type="text" name="fav_pet"><br><br>
-    Favorite Place to Go: <input type="text" name="fav_place"><br><br>
-    Favorite Song: <input type="text" name="fav_song"><br><br>
+<div class="form-container">
+    <h2>20 Question Form</h2>
+    
+    <?php if ($successMessage): ?>
+        <div class="success-message"><?php echo $successMessage; ?></div>
+    <?php endif; ?>
 
-    <button type="submit">Submit</button>
-</form>
+    <form method="post">
+        <label>Last Name</label>
+        <input type="text" name="last_name">
+        
+        <label>First Name</label>
+        <input type="text" name="first_name">
+        
+        <label>Date of Birth</label>
+        <input type="date" name="dob">
+        
+        <label>Hobbies</label>
+        <input type="text" name="hobbies">
+        
+        <label>Dislikes</label>
+        <input type="text" name="dislikes">
+        
+        <label>Likes</label>
+        <input type="text" name="likes">
+        
+        <label>Gender</label>
+        <input type="text" name="gender">
+        
+        <label>Pronouns</label>
+        <input type="text" name="pronouns">
+        
+        <label>Job (Work)</label>
+        <input type="text" name="job">
+        
+        <label>College You Want to Go To</label>
+        <input type="text" name="college">
+        
+        <label>GPA</label>
+        <input type="text" name="gpa">
+        
+        <label>BFF</label>
+        <input type="text" name="bff">
+        
+        <label>Zodiac Sign</label>
+        <input type="text" name="zodiac">
+        
+        <label>Sports</label>
+        <input type="text" name="sports">
+        
+        <label>Favorite Food</label>
+        <input type="text" name="fav_food">
+        
+        <label>Least Favorite Food</label>
+        <input type="text" name="least_fav_food">
+        
+        <label>Height</label>
+        <input type="text" name="height">
+        
+        <label>Favorite Pet</label>
+        <input type="text" name="fav_pet">
+        
+        <label>Favorite Place to Go</label>
+        <input type="text" name="fav_place">
+        
+        <label>Favorite Song</label>
+        <input type="text" name="fav_song">
+
+        <button type="submit" class="btn-primary">Submit</button>
+    </form>
+</div>
 
 </body>
 </html>

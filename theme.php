@@ -1,69 +1,75 @@
 <?php
-// Xbox-style theme layout
-?>
+$theme = [
+    'site_title' => 'Xbox Gaming Hub',
+    'primary_color' => '#107c10',
+    'primary_hover' => '#0e6e0e',
+    'background_color' => '#0e0e0e',
+    'card_background' => '#1a1a1a',
+    'text_color' => '#ffffff',
+    'text_muted' => '#cccccc',
+    'font_family' => '"Segoe UI", Arial, sans-serif',
+    'border_radius' => '4px',
+    'spacing_small' => '15px',
+    'spacing_medium' => '20px',
+    'spacing_large' => '40px',
+    'border_color' => '#222'
+];
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Xbox Theme</title>
-
-    <style>
+function getThemeStyles($theme) {
+    return "
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: {$theme['font_family']};
         }
 
         body {
-            background-color: #0e0e0e;
-            color: #ffffff;
+            background-color: {$theme['background_color']};
+            color: {$theme['text_color']};
         }
 
-        /* ===== HERO SECTION ===== */
         .hero {
             background: linear-gradient(
                 rgba(0,0,0,0.6),
                 rgba(0,0,0,0.9)
-            ), url("https://via.placeholder.com/1600x700") center / cover no-repeat;
+            ), url('https://via.placeholder.com/1600x700') center / cover no-repeat;
             padding: 80px 60px;
         }
 
         .hero h1 {
             font-size: 3rem;
-            margin-bottom: 15px;
+            margin-bottom: {$theme['spacing_small']};
         }
 
         .hero p {
             max-width: 600px;
             font-size: 1.1rem;
             margin-bottom: 25px;
-            color: #cccccc;
+            color: {$theme['text_muted']};
         }
 
-        .hero button {
-            background-color: #107c10;
+        .hero button, .btn-primary {
+            background-color: {$theme['primary_color']};
             border: none;
             color: white;
             padding: 14px 28px;
             font-size: 1rem;
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: {$theme['border_radius']};
         }
 
-        .hero button:hover {
-            background-color: #0e6e0e;
+        .hero button:hover, .btn-primary:hover {
+            background-color: {$theme['primary_hover']};
         }
 
-        /* ===== ICON NAV BAR ===== */
         .icon-bar {
             display: flex;
             justify-content: space-around;
-            padding: 20px 40px;
+            padding: {$theme['spacing_medium']} {$theme['spacing_large']};
             background-color: #111;
-            border-top: 1px solid #222;
-            border-bottom: 1px solid #222;
+            border-top: 1px solid {$theme['border_color']};
+            border-bottom: 1px solid {$theme['border_color']};
         }
 
         .icon {
@@ -76,28 +82,27 @@
             display: block;
             font-size: 1.5rem;
             margin-bottom: 6px;
-            color: #107c10;
+            color: {$theme['primary_color']};
         }
 
-        /* ===== CONTENT GRID ===== */
         .content {
-            padding: 40px 60px;
+            padding: {$theme['spacing_large']} 60px;
         }
 
         .content h2 {
-            margin-bottom: 20px;
+            margin-bottom: {$theme['spacing_medium']};
             font-size: 1.8rem;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: {$theme['spacing_medium']};
         }
 
         .card {
-            background-color: #1a1a1a;
-            border-radius: 4px;
+            background-color: {$theme['card_background']};
+            border-radius: {$theme['border_radius']};
             overflow: hidden;
             transition: transform 0.2s ease;
         }
@@ -112,7 +117,7 @@
         }
 
         .card-body {
-            padding: 15px;
+            padding: {$theme['spacing_small']};
         }
 
         .card-body h3 {
@@ -124,68 +129,57 @@
             font-size: 0.9rem;
             color: #bbb;
         }
-    </style>
-</head>
 
-<body>
+        .form-container {
+            max-width: 600px;
+            margin: {$theme['spacing_large']} auto;
+            padding: {$theme['spacing_large']};
+            background-color: {$theme['card_background']};
+            border-radius: {$theme['border_radius']};
+        }
 
-    <!-- HERO -->
-    <section class="hero">
-        <h1>Discover Your Next Favorite Game</h1>
-        <p>
-            Experience the best in gaming with Xbox. Play the latest titles,
-            explore new worlds, and connect with friends.
-        </p>
-        <button>Join Game Pass</button>
-    </section>
+        .form-container h2 {
+            margin-bottom: {$theme['spacing_medium']};
+            color: {$theme['primary_color']};
+        }
 
-    <!-- ICON NAV -->
-    <nav class="icon-bar">
-        <div class="icon"><span>🎮</span>Games</div>
-        <div class="icon"><span>🕹️</span>Game Pass</div>
-        <div class="icon"><span>🏆</span>Achievements</div>
-        <div class="icon"><span>👥</span>Community</div>
-        <div class="icon"><span>⚙️</span>Settings</div>
-    </nav>
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: {$theme['text_muted']};
+        }
 
-    <!-- CONTENT -->
-    <section class="content">
-        <h2>Featured Content</h2>
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: {$theme['spacing_small']};
+            border: 1px solid {$theme['border_color']};
+            border-radius: {$theme['border_radius']};
+            background-color: {$theme['background_color']};
+            color: {$theme['text_color']};
+        }
 
-        <div class="grid">
-            <div class="card">
-                <img src="https://via.placeholder.com/400x225">
-                <div class="card-body">
-                    <h3>New Releases</h3>
-                    <p>Explore the newest games available now.</p>
-                </div>
-            </div>
+        .form-container input:focus {
+            outline: none;
+            border-color: {$theme['primary_color']};
+        }
 
-            <div class="card">
-                <img src="https://via.placeholder.com/400x225">
-                <div class="card-body">
-                    <h3>Top Rated</h3>
-                    <p>Play the highest rated titles on Xbox.</p>
-                </div>
-            </div>
+        .success-message {
+            background-color: {$theme['primary_color']};
+            color: white;
+            padding: {$theme['spacing_small']};
+            border-radius: {$theme['border_radius']};
+            margin-bottom: {$theme['spacing_medium']};
+        }
 
-            <div class="card">
-                <img src="https://via.placeholder.com/400x225">
-                <div class="card-body">
-                    <h3>Coming Soon</h3>
-                    <p>Get ready for upcoming releases.</p>
-                </div>
-            </div>
+        a {
+            color: {$theme['primary_color']};
+            text-decoration: none;
+        }
 
-            <div class="card">
-                <img src="https://via.placeholder.com/400x225">
-                <div class="card-body">
-                    <h3>Game Pass Picks</h3>
-                    <p>Hand-picked games included with Game Pass.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</body>
-</html>
+        a:hover {
+            text-decoration: underline;
+        }
+    ";
+}
+?>
