@@ -1,7 +1,7 @@
 <?php
 require_once 'theme.php';
 
-$dbFile = "db.json";
+$dbFile = "data.json";
 $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
