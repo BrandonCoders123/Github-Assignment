@@ -1,124 +1,215 @@
 <?php
 /**
- * Xbox Dark Theme Styles
+ * Xbox Dark Theme Configuration
  */
 
-$xbox_theme_css = '
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
+$theme = [
+    'site_title' => 'Xbox Profile',
+    'primary_color' => '#107c10',
+    'background_color' => '#0e0e0e',
+    'card_background' => '#1a1a1a',
+    'text_color' => '#ffffff',
+    'text_muted' => '#aaaaaa',
+    'border_color' => '#333333',
+    'border_radius' => '4px',
+    'spacing_small' => '10px',
+    'spacing_medium' => '20px',
+    'spacing_large' => '40px'
+];
 
-    body {
-        background-color: #0e0e0e;
-        color: #ffffff;
-    }
+function getThemeStyles($theme) {
+    return '
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
 
-    /* ===== HERO SECTION ===== */
-    .hero {
-        background: linear-gradient(
-            rgba(0,0,0,0.6),
-            rgba(0,0,0,0.9)
-        ), url("https://via.placeholder.com/1600x700") center / cover no-repeat;
-        padding: 80px 60px;
-    }
+        body {
+            background-color: ' . $theme['background_color'] . ';
+            color: ' . $theme['text_color'] . ';
+        }
 
-    .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 15px;
-    }
+        a {
+            color: ' . $theme['primary_color'] . ';
+            text-decoration: none;
+        }
 
-    .hero p {
-        max-width: 600px;
-        font-size: 1.1rem;
-        margin-bottom: 25px;
-        color: #cccccc;
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    .hero button {
-        background-color: #107c10;
-        border: none;
-        color: white;
-        padding: 14px 28px;
-        font-size: 1rem;
-        cursor: pointer;
-        border-radius: 3px;
-    }
+        /* ===== ICON NAV BAR ===== */
+        .icon-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 40px;
+            background-color: #111;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
 
-    .hero button:hover {
-        background-color: #0e6e0e;
-    }
+        .icon {
+            text-align: center;
+            color: ' . $theme['text_muted'] . ';
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
 
-    /* ===== ICON NAV BAR ===== */
-    .icon-bar {
-        display: flex;
-        justify-content: space-around;
-        padding: 20px 40px;
-        background-color: #111;
-        border-top: 1px solid #222;
-        border-bottom: 1px solid #222;
-    }
+        .icon:hover {
+            color: ' . $theme['text_color'] . ';
+            text-decoration: none;
+        }
 
-    .icon {
-        text-align: center;
-        color: #aaa;
-        font-size: 0.9rem;
-    }
+        .icon span {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            color: ' . $theme['primary_color'] . ';
+        }
 
-    .icon span {
-        display: block;
-        font-size: 1.5rem;
-        margin-bottom: 6px;
-        color: #107c10;
-    }
+        /* ===== FORM CONTAINER ===== */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: ' . $theme['spacing_large'] . ';
+        }
 
-    /* ===== CONTENT GRID ===== */
-    .content {
-        padding: 40px 60px;
-    }
+        .form-container h2 {
+            color: ' . $theme['primary_color'] . ';
+            margin-bottom: ' . $theme['spacing_medium'] . ';
+            text-align: center;
+        }
 
-    .content h2 {
-        margin-bottom: 20px;
-        font-size: 1.8rem;
-    }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: ' . $theme['text_muted'] . ';
+            font-size: 0.9rem;
+        }
 
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
+        .form-container input[type="text"],
+        .form-container input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: ' . $theme['spacing_small'] . ';
+            background-color: ' . $theme['card_background'] . ';
+            border: 1px solid ' . $theme['border_color'] . ';
+            border-radius: ' . $theme['border_radius'] . ';
+            color: ' . $theme['text_color'] . ';
+            font-size: 1rem;
+        }
 
-    .card {
-        background-color: #1a1a1a;
-        border-radius: 4px;
-        overflow: hidden;
-        transition: transform 0.2s ease;
-    }
+        .form-container input:focus {
+            outline: none;
+            border-color: ' . $theme['primary_color'] . ';
+        }
 
-    .card:hover {
-        transform: scale(1.03);
-    }
+        .btn-primary {
+            width: 100%;
+            background-color: ' . $theme['primary_color'] . ';
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: ' . $theme['border_radius'] . ';
+            margin-top: ' . $theme['spacing_medium'] . ';
+        }
 
-    .card img {
-        width: 100%;
-        display: block;
-    }
+        .btn-primary:hover {
+            background-color: #0e6e0e;
+        }
 
-    .card-body {
-        padding: 15px;
-    }
+        .success-message {
+            background-color: ' . $theme['primary_color'] . ';
+            color: white;
+            padding: ' . $theme['spacing_small'] . ';
+            border-radius: ' . $theme['border_radius'] . ';
+            margin-bottom: ' . $theme['spacing_medium'] . ';
+            text-align: center;
+        }
 
-    .card-body h3 {
-        font-size: 1.1rem;
-        margin-bottom: 8px;
-    }
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(
+                rgba(0,0,0,0.6),
+                rgba(0,0,0,0.9)
+            ), url("https://via.placeholder.com/1600x700") center / cover no-repeat;
+            padding: 80px 60px;
+        }
 
-    .card-body p {
-        font-size: 0.9rem;
-        color: #bbb;
-    }
-</style>
-';
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #cccccc;
+        }
+
+        .hero button {
+            background-color: ' . $theme['primary_color'] . ';
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .hero button:hover {
+            background-color: #0e6e0e;
+        }
+
+        /* ===== CONTENT GRID ===== */
+        .content {
+            padding: 40px 60px;
+        }
+
+        .content h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: ' . $theme['card_background'] . ';
+            border-radius: ' . $theme['border_radius'] . ';
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        .card img {
+            width: 100%;
+            display: block;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-body h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .card-body p {
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+    ';
+}

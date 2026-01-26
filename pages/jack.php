@@ -1,7 +1,7 @@
 <?php
-require_once 'theme.php';
+require_once '../theme.php';
 
-$dbFile = "data.json";
+$dbFile = "../data.json";
 $weaver = null;
 
 if (file_exists($dbFile)) {
@@ -89,9 +89,9 @@ if (file_exists($dbFile)) {
 <body>
 
 <nav class="icon-bar">
-    <a href="index.php" class="icon"><span>📝</span>Form</a>
+    <a href="../index.php" class="icon"><span>📝</span>Form</a>
     <a href="jack.php" class="icon"><span>🎮</span>Home</a>
-    <a href="function.php" class="icon"><span>📊</span>Submissions</a>
+    <a href="../function.php" class="icon"><span>📊</span>Submissions</a>
 </nav>
 
 <section class="profile-section">
