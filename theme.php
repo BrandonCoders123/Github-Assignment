@@ -4,7 +4,7 @@
  */
 
 $theme = [
-    'site_title' => 'Xbox Profile',
+    'site_title' => 'Student Portal',
     'primary_color' => '#107c10',
     'background_color' => '#0e0e0e',
     'card_background' => '#1a1a1a',
