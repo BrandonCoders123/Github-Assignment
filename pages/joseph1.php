@@ -82,7 +82,7 @@ if (!$student) {
 
 <nav class="icon-bar">
     <a href="../index.php" class="icon"><span>🏠</span>Students</a>
-    <a href="jack.php" class="icon"><span>🎮</span>Jack</a>
+    <a href="../form.php" class="icon"><span>📝</span>Form</a>
     <a href="../submissions.php" class="icon"><span>📊</span>Submissions</a>
 </nav>
 
