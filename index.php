@@ -1,137 +1,152 @@
 <?php
-require_once 'theme.php';
+require_once 'functions.php';
 
-$dbFile = "data.json";
-$successMessage = "";
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $entry = [
-        "last_name" => $_POST["last_name"] ?? "",
-        "first_name" => $_POST["first_name"] ?? "",
-        "date_of_birth" => $_POST["dob"] ?? "",
-        "hobbies" => $_POST["hobbies"] ?? "",
-        "dislikes" => $_POST["dislikes"] ?? "",
-        "likes" => $_POST["likes"] ?? "",
-        "gender" => $_POST["gender"] ?? "",
-        "pronouns" => $_POST["pronouns"] ?? "",
-        "job" => $_POST["job"] ?? "",
-        "college" => $_POST["college"] ?? "",
-        "gpa" => $_POST["gpa"] ?? "",
-        "bff" => $_POST["bff"] ?? "",
-        "zodiac" => $_POST["zodiac"] ?? "",
-        "sports" => $_POST["sports"] ?? "",
-        "fav_food" => $_POST["fav_food"] ?? "",
-        "least_fav_food" => $_POST["least_fav_food"] ?? "",
-        "height" => $_POST["height"] ?? "",
-        "fav_pet" => $_POST["fav_pet"] ?? "",
-        "fav_place" => $_POST["fav_place"] ?? "",
-        "fav_song" => $_POST["fav_song"] ?? "",
-        "submitted_at" => date("Y-m-d H:i:s")
-    ];
-
-    if (file_exists($dbFile)) {
-        $data = json_decode(file_get_contents($dbFile), true);
-        if (!is_array($data)) {
-            $data = [];
-        }
-    } else {
-        $data = [];
-    }
-
-    $data[] = $entry;
-    file_put_contents($dbFile, json_encode($data, JSON_PRETTY_PRINT));
-    $successMessage = "Form submitted successfully!";
-}
+$students = loadStudents();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $theme['site_title']; ?> - 20 Questions</title>
+    <title><?php echo $theme['site_title']; ?> - Students</title>
     <style>
         <?php echo getThemeStyles($theme); ?>
+        
+        .hero {
+            text-align: center;
+            padding: <?php echo $theme['spacing_large']; ?>;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+        }
+        
+        .hero h1 {
+            color: <?php echo $theme['primary_color']; ?>;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            color: <?php echo $theme['text_muted']; ?>;
+        }
+        
+        .students-container {
+            padding: <?php echo $theme['spacing_large']; ?>;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .students-container h2 {
+            color: <?php echo $theme['text_color']; ?>;
+            margin-bottom: <?php echo $theme['spacing_medium']; ?>;
+        }
+        
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: <?php echo $theme['spacing_medium']; ?>;
+        }
+        
+        .student-card {
+            background-color: <?php echo $theme['card_background']; ?>;
+            border-radius: <?php echo $theme['border_radius']; ?>;
+            padding: <?php echo $theme['spacing_medium']; ?>;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(16, 124, 16, 0.3);
+        }
+        
+        .student-card h3 {
+            color: <?php echo $theme['primary_color']; ?>;
+            margin-bottom: <?php echo $theme['spacing_small']; ?>;
+            font-size: 1.3rem;
+        }
+        
+        .student-info {
+            color: <?php echo $theme['text_muted']; ?>;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .student-info strong {
+            color: <?php echo $theme['text_color']; ?>;
+        }
+        
+        .btn-view {
+            display: inline-block;
+            background-color: <?php echo $theme['primary_color']; ?>;
+            color: white;
+            padding: 10px 20px;
+            border-radius: <?php echo $theme['border_radius']; ?>;
+            text-decoration: none;
+            margin-top: <?php echo $theme['spacing_small']; ?>;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .btn-view:hover {
+            background-color: #0e6e0e;
+            text-decoration: none;
+        }
+        
+        .no-students {
+            text-align: center;
+            padding: <?php echo $theme['spacing_large']; ?>;
+            color: <?php echo $theme['text_muted']; ?>;
+        }
+        
+        #greeting {
+            font-size: 1.2rem;
+            color: <?php echo $theme['text_color']; ?>;
+        }
     </style>
 </head>
 <body>
 
 <nav class="icon-bar">
-    <a href="index.php" class="icon"><span>📝</span>Form</a>
-    <a href="pages/jack.php" class="icon"><span>🎮</span>Home</a>
-    <a href="function.php" class="icon"><span>📊</span>Submissions</a>
+    <a href="index.php" class="icon"><span>🏠</span>Students</a>
+    <a href="pages/jack.php" class="icon"><span>🎮</span>Jack</a>
+    <a href="submissions.php" class="icon"><span>📊</span>Submissions</a>
 </nav>
 
-<div class="form-container">
-    <h2>20 Question Form</h2>
+<section class="hero">
+    <h1><?php echo $theme['site_title']; ?></h1>
+    <p id="greeting"><?php echo getGreeting(); ?>! Welcome to our student profiles.</p>
+</section>
+
+<div class="students-container">
+    <h2>All Students</h2>
     
-    <?php if ($successMessage): ?>
-        <div class="success-message"><?php echo $successMessage; ?></div>
+    <?php if (empty($students)): ?>
+        <div class="no-students">
+            <p>No students found in the database.</p>
+        </div>
+    <?php else: ?>
+        <div class="students-grid">
+            <?php foreach ($students as $student): ?>
+                <?php displayStudentCard($student); ?>
+            <?php endforeach; ?>
+        </div>
     <?php endif; ?>
-
-    <form method="post">
-        <label>Last Name</label>
-        <input type="text" name="last_name">
-        
-        <label>First Name</label>
-        <input type="text" name="first_name">
-        
-        <label>Date of Birth</label>
-        <input type="date" name="dob">
-        
-        <label>Hobbies</label>
-        <input type="text" name="hobbies">
-        
-        <label>Dislikes</label>
-        <input type="text" name="dislikes">
-        
-        <label>Likes</label>
-        <input type="text" name="likes">
-        
-        <label>Gender</label>
-        <input type="text" name="gender">
-        
-        <label>Pronouns</label>
-        <input type="text" name="pronouns">
-        
-        <label>Job (Work)</label>
-        <input type="text" name="job">
-        
-        <label>College You Want to Go To</label>
-        <input type="text" name="college">
-        
-        <label>GPA</label>
-        <input type="text" name="gpa">
-        
-        <label>BFF</label>
-        <input type="text" name="bff">
-        
-        <label>Zodiac Sign</label>
-        <input type="text" name="zodiac">
-        
-        <label>Sports</label>
-        <input type="text" name="sports">
-        
-        <label>Favorite Food</label>
-        <input type="text" name="fav_food">
-        
-        <label>Least Favorite Food</label>
-        <input type="text" name="least_fav_food">
-        
-        <label>Height</label>
-        <input type="text" name="height">
-        
-        <label>Favorite Pet</label>
-        <input type="text" name="fav_pet">
-        
-        <label>Favorite Place to Go</label>
-        <input type="text" name="fav_place">
-        
-        <label>Favorite Song</label>
-        <input type="text" name="fav_song">
-
-        <button type="submit" class="btn-primary">Submit</button>
-    </form>
 </div>
+
+<script>
+function updateGreeting() {
+    const hour = new Date().getHours();
+    let greeting;
+    if (hour < 12) {
+        greeting = "Good Morning";
+    } else if (hour < 18) {
+        greeting = "Good Afternoon";
+    } else {
+        greeting = "Good Evening";
+    }
+    document.getElementById('greeting').textContent = greeting + "! Welcome to our student profiles.";
+}
+
+setInterval(updateGreeting, 60000);
+</script>
 
 </body>
 </html>

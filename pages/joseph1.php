@@ -81,9 +81,9 @@ if (!$student) {
 <body>
 
 <nav class="icon-bar">
-    <a href="../index.php" class="icon"><span>📝</span>Form</a>
-    <a href="../jack.php" class="icon"><span>🎮</span>Home</a>
-    <a href="../function.php" class="icon"><span>📊</span>Submissions</a>
+    <a href="../index.php" class="icon"><span>🏠</span>Students</a>
+    <a href="jack.php" class="icon"><span>🎮</span>Jack</a>
+    <a href="../submissions.php" class="icon"><span>📊</span>Submissions</a>
 </nav>
 
 <div class="profile-container">

@@ -1,15 +1,7 @@
 <?php
-require_once 'theme.php';
+require_once 'functions.php';
 
-$dbFile = "data.json";
-$submissions = [];
-
-if (file_exists($dbFile)) {
-    $submissions = json_decode(file_get_contents($dbFile), true);
-    if (!is_array($submissions)) {
-        $submissions = [];
-    }
-}
+$students = loadStudents();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +14,13 @@ if (file_exists($dbFile)) {
         
         .submissions-container {
             padding: <?php echo $theme['spacing_large']; ?>;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .submissions-container h2 {
+            color: <?php echo $theme['text_color']; ?>;
+            margin-bottom: <?php echo $theme['spacing_medium']; ?>;
         }
         
         .submission-card {
@@ -55,20 +54,20 @@ if (file_exists($dbFile)) {
 <body>
 
 <nav class="icon-bar">
-    <a href="index.php" class="icon"><span>📝</span>Form</a>
-    <a href="pages/jack.php" class="icon"><span>🎮</span>Home</a>
-    <a href="function.php" class="icon"><span>📊</span>Submissions</a>
+    <a href="index.php" class="icon"><span>🏠</span>Students</a>
+    <a href="pages/jack.php" class="icon"><span>🎮</span>Jack</a>
+    <a href="submissions.php" class="icon"><span>📊</span>Submissions</a>
 </nav>
 
 <div class="submissions-container">
     <h2>All Submissions</h2>
     
-    <?php if (empty($submissions)): ?>
+    <?php if (empty($students)): ?>
         <div class="no-submissions">
-            <p>No submissions yet. <a href="index.php">Fill out the form</a> to add one!</p>
+            <p>No submissions yet.</p>
         </div>
     <?php else: ?>
-        <?php foreach ($submissions as $index => $entry): ?>
+        <?php foreach ($students as $entry): ?>
             <div class="submission-card">
                 <h3><?php echo htmlspecialchars($entry['first_name'] . ' ' . $entry['last_name']); ?></h3>
                 <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($entry['date_of_birth']); ?></p>
