@@ -51,3 +51,30 @@ function getGreeting() {
         return "Good Evening";
     }
 }
+
+function getJackComm($student, $dbFile = "data.json") {
+    $students = loadStudents($dbFile);
+    $jack = null;
+    
+    foreach ($students as $entry) {
+        if ($entry['first_name'] === 'Jack' && $entry['last_name'] === 'Weaver') {
+            $jack = $entry;
+            break;
+        }
+    }
+    
+    if (!$jack) {
+        return $student['first_name'] . " doesn't have a common hobby with Jack.";
+    }
+    
+    $studentHobbies = array_map('trim', array_map('strtolower', explode(',', $student['hobbies'])));
+    $jackHobbies = array_map('trim', array_map('strtolower', explode(',', $jack['hobbies'])));
+    
+    $commonHobbies = array_intersect($studentHobbies, $jackHobbies);
+    
+    if (!empty($commonHobbies)) {
+        return "It seems " . $student['first_name'] . " has a common hobby with Jack.";
+    } else {
+        return $student['first_name'] . " doesn't have a common hobby with Jack.";
+    }
+}
