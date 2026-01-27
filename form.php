@@ -129,7 +129,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <label>Favorite Song</label>
         <input type="text" name="fav_song">
 
-        <button type="submit" class="btn-primary">Submit</button>
     </form>
 </div>
 
