@@ -58,7 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <nav class="icon-bar">
     <a href="index.php" class="icon"><span>🏠</span>Students</a>
     <a href="form.php" class="icon"><span>📝</span>Form</a>
-    <a href="submissions.php" class="icon"><span>📊</span>Submissions</a>
 </nav>
 
 <div class="form-container">
@@ -128,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         <label>Favorite Song</label>
         <input type="text" name="fav_song">
-
+        <button type="submit" class="btn-primary">Submit</button>
     </form>
 </div>
 
