@@ -149,7 +149,7 @@ if (!$student) {
 <div class="profile-container">
     <div class="hero">
         <h1><?php echo htmlspecialchars($student['first_name'] . " " . $student['last_name']); ?></h1>
-        <p style="margin-bottom: 20px;">Student Profile Spotlight</p>
+        <p style="margin-bottom: 20px;">Individual Student Showcase</p>
         <p><?php echo joseph_render_short_bio($student); ?></p>
     </div>
 
