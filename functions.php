@@ -52,6 +52,13 @@ function getGreeting() {
     }
 }
 
+function joseph_render_short_bio($student) {
+    $name = htmlspecialchars($student['first_name'] . ' ' . $student['last_name']);
+    $zodiac = htmlspecialchars($student['zodiac']);
+    $hobbies = htmlspecialchars($student['hobbies']);
+    return "This is $name. Their zodiac sign is $zodiac and they enjoy $hobbies.";
+}
+
 function getJackComm($student, $dbFile = "data.json") {
     $students = loadStudents($dbFile);
     $jack = null;
@@ -77,4 +84,16 @@ function getJackComm($student, $dbFile = "data.json") {
     } else {
         return $student['first_name'] . " doesn't have a common hobby with Jack.";
     }
+}
+
+// Joseph's custom function: short bio line
+function joseph_render_short_bio($student) {
+    $first    = htmlspecialchars($student['first_name']);
+    $last     = htmlspecialchars($student['last_name']);
+    $zodiac   = htmlspecialchars($student['zodiac']);
+    $hobbies  = htmlspecialchars($student['hobbies']);
+    $job      = htmlspecialchars($student['job']);
+    $favPlace = htmlspecialchars($student['fav_place']);
+
+    return "$first $last is a $zodiac who enjoys $hobbies, works as a $job, and loves spending time in $favPlace.";
 }

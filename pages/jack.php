@@ -85,6 +85,7 @@ if (!$student) {
     <div class="hero">
         <h1><?php echo htmlspecialchars($student['first_name'] . " " . $student['last_name']); ?></h1>
         <p>Individual Student Showcase</p>
+        <p><?php echo joseph_render_short_bio($student); ?></p>
     </div>
 
     <div class="profile-card">
