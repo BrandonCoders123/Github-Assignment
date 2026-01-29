@@ -14,17 +14,6 @@ if (is_array($data)) {
     }
 }
 
-// Custom functions (mocking teammates as per instructions)
-if (!function_exists('getTeammate2Note')) {
-    function getTeammate2Note($s) { return "Teammate 2 likes: " . $s['likes']; }
-}
-if (!function_exists('getTeammate3Note')) {
-    function getTeammate3Note($s) { return "Teammate 3 note: " . $s['job']; }
-}
-if (!function_exists('getTeammate4Note')) {
-    function getTeammate4Note($s) { return "Teammate 4 note: " . $s['college']; }
-}
-
 if (!$student) {
     die("Student not found.");
 }
@@ -104,9 +93,6 @@ if (!$student) {
         <div class="custom-functions">
             <h3>Team Insights</h3>
             <p><?php echo htmlspecialchars(getJackComm($student, '../data.json')); ?></p>
-            <p><?php echo htmlspecialchars(getTeammate2Note($student)); ?></p>
-            <p><?php echo htmlspecialchars(getTeammate3Note($student)); ?></p>
-            <p><?php echo htmlspecialchars(getTeammate4Note($student)); ?></p>
         </div>
     </div>
 </div>

@@ -17,28 +17,6 @@ if (is_array($data)) {
     }
 }
 
-// Custom teammate-style functions
-if (!function_exists('getTeammate2Note')) {
-    function getTeammate2Note($s) {
-        return "Teammate 2 says Brandon likes " . $s['likes'] . ".";
-    }
-}
-if (!function_exists('getTeammate3Note')) {
-    function getTeammate3Note($s) {
-        return "Teammate 3 thinks his job as a " . $s['job'] . " suits him well.";
-    }
-}
-if (!function_exists('getTeammate4Note')) {
-    function getTeammate4Note($s) {
-        return "Teammate 4 heard Brandon is considering " . $s['college'] . ".";
-    }
-}
-if (!function_exists('getFunFact')) {
-    function getFunFact($s) {
-        return "Fun fact: Brandon's zodiac sign is " . $s['zodiac'] . ".";
-    }
-}
-
 if (!$student) {
     die("Student not found.");
 }
@@ -168,10 +146,6 @@ if (!$student) {
         <div class="custom-functions">
             <h3>Team Insights</h3>
             <p><?php echo htmlspecialchars(getJackComm($student, '../data.json')); ?></p>
-            <p><?php echo htmlspecialchars(getTeammate2Note($student)); ?></p>
-            <p><?php echo htmlspecialchars(getTeammate3Note($student)); ?></p>
-            <p><?php echo htmlspecialchars(getTeammate4Note($student)); ?></p>
-            <p><?php echo htmlspecialchars(getFunFact($student)); ?></p>
         </div>
     </div>
 </div>
